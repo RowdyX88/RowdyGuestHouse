@@ -1,4 +1,4 @@
-/* Custom CSS for Rowdy Guest House */
+/* Custom CSS for Rowdy Place */
 :root {
     --background: #F6F7FB;
     --primary: #0F6E6E;
@@ -87,4 +87,131 @@ h1, h2, h3 {
     display: inline-block;
     vertical-align: middle;
     margin-right: 4px;
+}
+.hero {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.hero-card {
+    background: linear-gradient(135deg, #FFFDF8 0%, #FFF7E6 100%);
+    border-radius: 24px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    border: 1px solid rgba(241,233,210,0.1);
+    padding: 36px 28px 28px 28px;
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    font-family: 'Inter', 'Roboto', Arial, sans-serif;
+    animation: fadeInCard 0.8s cubic-bezier(.4,0,.2,1);
+}
+@keyframes fadeInCard {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-bottom: 32px;
+    list-style: none;
+    padding: 0;
+}
+.feature-list li {
+    color: #555;
+    font-size: 18px;
+    line-height: 1.7;
+    font-family: inherit;
+    font-weight: 500;
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    border: none;
+    opacity: 0;
+    animation: fadeInLine 1s cubic-bezier(.4,0,.2,1) forwards;
+}
+.feature-list li:nth-child(1) { animation-delay: 0.1s; }
+.feature-list li:nth-child(2) { animation-delay: 0.2s; }
+.feature-list li:nth-child(3) { animation-delay: 0.3s; }
+.feature-list li:nth-child(4) { animation-delay: 0.4s; }
+@keyframes fadeInLine {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.feature-list .price {
+    color: #F5B400;
+    font-weight: bold;
+    font-size: 20px;
+    background: #FFF7E0;
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin-top: 2px;
+    box-shadow: 0 2px 8px rgba(245,180,0,0.08);
+    letter-spacing: 0.5px;
+}
+.hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 18px;
+}
+@media (min-width: 481px) {
+    .hero-actions {
+        flex-direction: row;
+        gap: 16px;
+    }
+}
+.btn {
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 16px;
+    height: 56px;
+    box-shadow: 0 6px 14px rgba(15,107,99,0.12);
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn.primary {
+    background: #0F6B63;
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(15,107,99,0.25);
+}
+.btn.secondary {
+    background: #F5B400;
+    color: #3B2E06;
+    box-shadow: 0 6px 14px rgba(245,180,0,0.15);
+}
+.btn:active, .btn:focus {
+    outline: 2px solid rgba(15,107,99,0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(15,107,99,0.25);
+}
+.hero-caption {
+    font-size: 14px;
+    color: #7A6C4D;
+    text-align: center;
+    margin-top: 22px;
+    line-height: 1.6;
+    font-family: inherit;
+}
+@media (max-width: 480px) {
+    .hero-card {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        padding: 28px 16px 20px 16px;
+    }
+    .feature-list {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .btn {
+        height: 52px;
+        font-size: 17px;
+    }
 }

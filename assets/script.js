@@ -1,9 +1,9 @@
-// JavaScript for Rowdy Guest House
-const HOSTEL_NAME = "Rowdy Guest House";
+// JavaScript for Rowdy Place
+const HOSTEL_NAME = "Rowdy Place";
 const ADDRESS = "Rr. \"KATËR DESHMORËT\", Nd.130, H.4, Ap.5, Tirana 1017, Albania";
 const PHONE = "+355694826798";
 const WHATSAPP = "https://wa.me/355694826798";
-const EMAIL = "tailorssons@gmail.com";
+const EMAIL = "therowdyson@gmail.com";
 const BASE_PRICE = 10; // in EUR
 const CHECKOUT_TIME = "10-11 AM";
 let selectedDate = null;
@@ -120,20 +120,20 @@ function submitBooking() {
         return;
     }
     if (!selectedDate) {
-        document.getElementById('calendar-message').textContent = 'Please select a date before booking.';
+        document.getElementById('calendar-message').textContent = 'Please select a date before sending your request.';
         return;
     }
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const dateStr = selectedDate.toLocaleDateString('en-US', options);
-    let bookingMessage = `Hello! I'd like to book a ${selectedRoom || 'room'} at ${HOSTEL_NAME} for ${dateStr}. `;
-    bookingMessage += `My name is ${name} (${email}). `;
+    let bookingMessage = `Hello! I am interested in staying at Rowdy Place on ${dateStr}. This is a request for availability, not a booking. My name is ${name} (${email}). `;
     if (message) bookingMessage += `Additional info: ${message}`;
+    bookingMessage += ' Please let me know if the date is available. I understand this is a personal home stay, occasional rentals only, and no online payments.';
     const encodedMessage = encodeURIComponent(bookingMessage);
     window.open(`${WHATSAPP}?text=${encodedMessage}`, '_blank');
     setTimeout(() => {
         if (!document.hidden) {
-            const subject = `Booking request for ${dateStr}`;
-            const body = `Hello,\n\nI'd like to book a ${selectedRoom || 'room'} for ${dateStr}.\n\nName: ${name}\nEmail: ${email}\n\n${message ? `Message: ${message}\n\n` : ''}Please let me know about availability!\n\nThanks,\n${name}`;
+            const subject = `Availability request for ${dateStr}`;
+            const body = `Hello,\n\nI am interested in staying at Rowdy Place on ${dateStr}. This is a request for availability, not a booking.\n\nName: ${name}\nEmail: ${email}\n${message ? `Message: ${message}\n\n` : ''}Please let me know if the date is available. I understand this is a personal home stay, occasional rentals only, and no online payments.\n\nThanks,\n${name}`;
             window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         }
     }, 500);
@@ -146,13 +146,4 @@ function updateCalendarMessage() {
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         msgEl.textContent = 'Selected date: ' + selectedDate.toLocaleDateString('en-US', options);
     }
-}
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        const toast = document.getElementById('toast');
-        toast.classList.remove('hidden');
-        setTimeout(() => {
-            toast.classList.add('hidden');
-        }, 2500);
-    });
 }
