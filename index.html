@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rowdy Guest House | Budget Hostel in Tirana</title>
+    <meta name="description" content="Affordable backpacker hostel in central Tirana. Private bathrooms, shared kitchens, from €10/bed. Book your stay today!">
+    <meta property="og:title" content="Rowdy Guest House">
+    <meta property="og:description" content="Budget hostel in Tirana with private bathrooms and shared kitchens from €10/bed">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#F6F7FB',
+                        primary: '#0F6E6E',
+                        accent: '#FFB800',
+                        text: '#0F1A1C',
+                        surface: '#FFFFFF',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="pb-20">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-10">
+        <div class="container mx-auto px-4 py-4">
+            <h1 class="text-2xl font-bold text-primary">Rowdy Guest House</h1>
+        </div>
+    </header>
+    <!-- Main Content Sections -->
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="container mx-auto px-4">
+                <!-- Hero Card -->
+                <div class="card p-6 mb-8">
+                    <h2 class="text-3xl font-bold mb-2">Rowdy Guest House</h2>
+                    <p class="text-xl mb-6">Budget hostel in central Tirana from <span class="font-bold text-primary">€10/bed</span></p>
+                    <div class="flex flex-col space-y-4">
+                        <button onclick="showSection('book')" class="btn-primary py-4 px-6 rounded-xl text-lg font-semibold text-center">Book Now</button>
+                        <button onclick="showSection('rooms')" class="btn-accent py-4 px-6 rounded-xl text-lg font-semibold text-center">See Rooms</button>
+                    </div>
+                </div>
+                <!-- Feature Chips -->
+                <div class="flex flex-wrap gap-3 mb-8">
+                    <!-- ...SVG icons and features... -->
+                    <div class="bg-white rounded-full py-2 px-4 shadow-sm flex items-center">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span>800m to center</span>
+                    </div>
+                    <div class="bg-white rounded-full py-2 px-4 shadow-sm flex items-center">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
+                        </svg>
+                        <span>Private bathroom</span>
+                    </div>
+                    <div class="bg-white rounded-full py-2 px-4 shadow-sm flex items-center">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        <span>Kitchen per floor</span>
+                    </div>
+                </div>
+                <!-- Quick Gallery -->
+                <h3 class="text-xl font-bold mb-4">Backpacker vibe</h3>
+                <div class="grid grid-cols-2 gap-3 mb-8">
+                    <div class="card aspect-square bg-gray-100 rounded-xl overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-primary/10 to-accent/10"></div>
+                    </div>
+                    <div class="card aspect-square bg-gray-100 rounded-xl overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-accent/10 to-primary/10"></div>
+                    </div>
+                    <div class="card aspect-square bg-gray-100 rounded-xl overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20"></div>
+                    </div>
+                    <div class="card aspect-square bg-gray-100 rounded-xl overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-accent/20 to-primary/20"></div>
+                    </div>
+                </div>
+                <!-- Testimonial -->
+                <div class="card p-6">
+                    <p class="italic mb-2">"Great location, clean rooms, and friendly staff. Perfect for backpackers!"</p>
+                    <p class="text-sm text-gray-600">- Marco, Italy</p>
+                </div>
+            </div>
+        </section>
+        <!-- Rooms Section -->
+        <section id="rooms" class="section">
+            <!-- ...existing code for rooms... -->
+        </section>
+        <!-- Book Section -->
+        <section id="book" class="section">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl font-bold mb-6">Book Your Stay</h2>
+                <div class="card p-6 mb-6">
+                    <label class="block text-lg font-semibold mb-2">Select a date:</label>
+                    <div id="calendar" class="mb-6"></div>
+                    <div id="calendar-message" class="mb-4 text-sm text-gray-600"></div>
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium mb-1">Full Name</label>
+                        <input type="text" id="name" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium mb-1">Email</label>
+                        <input type="email" id="email" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block text-sm font-medium mb-1">Message (optional)</label>
+                        <textarea id="message" rows="3" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                    </div>
+                    <button onclick="submitBooking()" class="btn-primary w-full py-4 rounded-xl text-lg font-semibold">Request Booking</button>
+                </div>
+            </div>
+        </section>
+        <!-- Location Section -->
+        <section id="location" class="section">
+            <!-- ...existing code for location... -->
+        </section>
+    </main>
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-10">
+        <div class="flex justify-around">
+            <button onclick="showSection('home')" class="nav-item py-4 px-6 flex flex-col items-center active" aria-label="Home">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                <span class="text-xs mt-1">Home</span>
+            </button>
+            <button onclick="showSection('rooms')" class="nav-item py-4 px-6 flex flex-col items-center" aria-label="Rooms">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-4-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                </svg>
+                <span class="text-xs mt-1">Rooms</span>
+            </button>
+            <button onclick="showSection('book')" class="nav-item py-4 px-6 flex flex-col items-center" aria-label="Book">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <span class="text-xs mt-1">Book</span>
+            </button>
+            <button onclick="showSection('location')" class="nav-item py-4 px-6 flex flex-col items-center" aria-label="Location">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                <span class="text-xs mt-1">Location</span>
+            </button>
+        </div>
+    </nav>
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-2 rounded-lg hidden">
+        Copied to clipboard!
+    </div>
+    <!-- JSON-LD for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Hostel",
+        "name": "Rowdy Guest House",
+        "description": "Budget hostel in central Tirana with private bathrooms and shared kitchens from €10/bed",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Rr. \"KATËR DESHMORËT\", Nd.130, H.4, Ap.5",
+            "addressLocality": "Tirana",
+            "postalCode": "1017",
+            "addressCountry": "AL"
+        },
+        "priceRange": "€10+",
+        "telephone": "+355694826798",
+        "image": "https://example.com/images/rowdy-guest-house.jpg"
+    }
+    </script>
+    <script src="assets/script.js"></script>
+</body>
+</html>

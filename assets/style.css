@@ -1,0 +1,90 @@
+/* Custom CSS for Rowdy Guest House */
+:root {
+    --background: #F6F7FB;
+    --primary: #0F6E6E;
+    --accent: #FFB800;
+    --text: #0F1A1C;
+    --surface: #FFFFFF;
+}
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+}
+h1, h2, h3 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 700;
+}
+.card {
+    background-color: var(--surface);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+    transition: all 0.2s ease;
+}
+.btn-primary:hover {
+    background-color: #0d5d5d;
+    transform: translateY(-2px);
+}
+.btn-accent {
+    background-color: var(--accent);
+    color: var(--text);
+    transition: all 0.2s ease;
+}
+.btn-accent:hover {
+    background-color: #e6a600;
+    transform: translateY(-2px);
+}
+.section {
+    min-height: 100vh;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    display: none;
+}
+.section.active {
+    display: block;
+}
+.nav-item.active {
+    color: var(--primary);
+}
+.calendar-day {
+    transition: all 0.2s ease;
+}
+.calendar-day:hover:not(.disabled):not(.selected) {
+    background-color: rgba(15, 110, 110, 0.1);
+}
+.calendar-day.selected {
+    background-color: var(--primary);
+    color: white;
+}
+.calendar-day.today {
+    border: 2px solid var(--accent);
+}
+.calendar-day.disabled {
+    color: #ccc;
+    pointer-events: none;
+}
+.toast {
+    animation: fadeInOut 2.5s ease-in-out;
+}
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+.icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+}
