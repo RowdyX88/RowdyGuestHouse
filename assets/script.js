@@ -1,3 +1,21 @@
+// Ensure gallery is populated on initial load
+document.addEventListener('DOMContentLoaded', function() {
+    setupDynamicGallery();
+});
+// Basic navigation function to fix ReferenceError and enable buttons
+function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+    // Show the requested section
+    const target = document.getElementById(sectionId);
+    if (target) {
+        target.classList.add('active');
+        // If showing home/gallery, update gallery
+        if (sectionId === 'home' || sectionId === 'dynamic-gallery') {
+            setupDynamicGallery();
+        }
+    }
+}
 // JavaScript for Rowdy Place
 const HOSTEL_NAME = "Rowdy Place";
 const ADDRESS = "Rr. \"KATËR DESHMORËT\", Nd.130, H.4, Ap.5, Tirana 1017, Albania";
@@ -10,93 +28,188 @@ let selectedDate = null;
 let selectedRoom = null;
 let currentMonth = new Date().getMonth();
 let currentYear = new Date().getFullYear();
+// --- Dynamic Gallery Logic ---
+const galleryImages = [
+    "1000030498.jpg", "1000030499.jpg", "1000030500.jpg", "1000030501.jpg", "1000030502.jpg",
+    "1000030504.jpg", "1000030505.jpg", "1000030506.jpg", "1000030507 (1).jpg", "1000030508.jpg",
+    "1000030509.jpg", "1000030510.jpg", "1000030511.jpg", "IMG_20200426_140356.jpg", "IMG_20200426_140406.jpg",
+    "IMG_20200430_103210.jpg", "IMG_20200619_122011.jpg", "IMG_20200619_122108 (1).jpg",
+    "IMG_20200619_122728.jpg", "IMG_20200619_122823.jpg", "IMG_20200619_124012.jpg", "IMG_20200619_124437.jpg",
+    "IMG_20200619_124953.jpg", "IMG_20200619_125018.jpg", "Rowdy-room.jpg"
+];
+
+function setupDynamicGallery() {
+    function getRandomImages(arr, count) {
+        const shuffled = arr.slice().sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, count);
+    }
+    function imageExists(src) {
+        const req = new XMLHttpRequest();
+        req.open('HEAD', src, false);
+        try {
+            req.send();
+            return req.status !== 404;
+        } catch (e) {
+            return false;
+        }
+    }
+    function updatePanels() {
+        console.log('updatePanels called');
+        const panels = document.querySelectorAll('.gallery-panel');
+        console.log('Gallery panels found:', panels.length, panels);
+        let usedImages = [];
+        panels.forEach((panel, idx) => {
+            panel.innerHTML = "";
+            let imgs = getRandomImages(galleryImages.filter(img => !usedImages.includes(img)), 4);
+            // Filter out missing images
+            imgs = imgs.filter(img => imageExists(`images/${img}`));
+            console.log('Images for panel:', idx, imgs);
+            usedImages = usedImages.concat(imgs);
+            if (imgs.length === 0) {
+                // Add placeholder if no images
+                const placeholder = document.createElement('div');
+                placeholder.textContent = "No images found";
+                placeholder.style.background = "#ff0";
+                placeholder.style.width = "100%";
+                placeholder.style.height = "100%";
+                placeholder.style.display = "flex";
+                placeholder.style.alignItems = "center";
+                placeholder.style.justifyContent = "center";
+                panel.appendChild(placeholder);
+                console.log('Placeholder added to panel', idx);
+            } else {
+                imgs.forEach(img => {
+                    const el = document.createElement('img');
+                    el.src = `images/${img}`;
+                    el.alt = "Rowdy Place Room";
+                    el.className = "w-1/2 h-1/2 object-cover rounded-lg p-1";
+                    el.style.border = "2px solid red";
+                    el.onerror = function() {
+                        el.style.display = 'none';
+                        console.log('Broken image removed:', el.src);
+                    };
+                    panel.appendChild(el);
+                    console.log('Image element added to panel', idx, el.src);
+                });
+            }
+        });
+    }
+    updatePanels();
+    setInterval(updatePanels, 10000);
+// removed stray closing brace
+
+// --- Dynamic Testimonials Logic ---
+// removed duplicate allReviews declaration
+
+function setupDynamicTestimonials() {
+    const section = document.getElementById('testimonial-section');
+    let expanded = false;
+    function renderTestimonials() {
+        section.innerHTML = "";
+        const toShow = expanded ? allReviews.length : 6;
+        for (let i = 0; i < toShow; i++) {
+            const review = allReviews[i];
+            section.innerHTML += `<p class='italic mb-2'>"${review.text}"</p><p class='text-sm text-gray-600'>— ${review.author}</p><hr class='my-3'>`;
+        }
+        section.innerHTML += `<button id='toggle-reviews' class='btn-accent py-2 px-4 rounded-lg font-semibold mt-2'>${expanded ? 'View Less' : 'View More'}</button>`;
+        document.getElementById('toggle-reviews').onclick = function() {
+            expanded = !expanded;
+            renderTestimonials();
+        };
+    }
+    renderTestimonials();
+// removed stray closing brace
+
 document.addEventListener('DOMContentLoaded', function() {
     renderCalendar(currentMonth, currentYear);
     updateCalendarMessage();
+    setupDynamicGallery();
+    setupDynamicTestimonials();
 });
-function showSection(sectionId) {
-    document.querySelectorAll('.section').forEach(section => {
-        section.classList.remove('active');
-    });
-    document.getElementById(sectionId).classList.add('active');
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
-    });
-    const navButtons = document.querySelectorAll('.nav-item');
-    const index = ['home', 'rooms', 'book', 'location'].indexOf(sectionId);
-    if (index >= 0 && navButtons[index]) {
-        navButtons[index].classList.add('active');
+        return shuffled.slice(0, count);
     }
-    if (sectionId === 'book') {
-        setTimeout(() => {
-            document.getElementById('calendar').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
+    function updatePanels() {
+        const panels = document.querySelectorAll('.gallery-panel');
+        let usedImages = [];
+        panels.forEach(panel => {
+            panel.innerHTML = "";
+            let imgs = getRandomImages(galleryImages.filter(img => !usedImages.includes(img)), 4);
+            usedImages = usedImages.concat(imgs);
+            imgs.forEach(img => {
+                const el = document.createElement('img');
+                el.src = `images/${img}`;
+                el.alt = "Rowdy Place Room";
+                el.className = "w-1/2 h-1/2 object-cover rounded-lg p-1";
+                panel.appendChild(el);
+            });
+        });
     }
+    updatePanels();
+    setInterval(updatePanels, 10000);
+
+
+// --- Dynamic Testimonials Logic ---
+const allReviews = [
+    {text: "Great location, clean rooms, and friendly environment. Perfect for backpackers!", author: "Marco, Italy"},
+    {text: "Felt like staying with a friend. Super chill and central.", author: "Ana, Spain"},
+    {text: "Loved the kitchen setup and the privacy of the rooms.", author: "Tom, UK"},
+    {text: "Perfect for solo travelers who want something simple and real.", author: "Elif, Turkey"},
+    {text: "Ten euros and I got more comfort than in a 50€ hotel. Madness.", author: "Jonas, Germany"},
+    {text: "Host is like that cool cousin you crash with. No stress, just good vibes.", author: "Sofia, Portugal"},
+    {text: "Stayed three nights, ended up extending to a week. Central, cheap, honest.", author: "Luka, Croatia"},
+    {text: "Showers hot, WiFi strong, beds clean. That’s all I need in life.", author: "James, USA"},
+    {text: "Kitchen parties and morning coffee in the corridor windows. Loved the vibe.", author: "Aylin, Turkey"},
+    {text: "Walking distance to everything. Didn’t spend a cent on taxis. Backpacker heaven.", author: "Mei, China"},
+    {text: "Felt like a shared flat more than a hostel, which made it 100x better.", author: "Daniel, Brazil"},
+    {text: "No fake luxury, just real comfort. Exactly what travelers need.", author: "Nina, Poland"},
+    {text: "Checked in for two nights, checked out with ten new friends and a mild hangover.", author: "Oliver, Ireland"},
+    {text: "Rowdy Place? More like Cozy Place. Slept like a rock after walking Tirana all day.", author: "Yuki, Japan"},
+    {text: "The host actually cares, not like those plastic hotels. Respect.", author: "Andrei, Romania"},
+    {text: "Kitchen = international food lab. Smelled like garlic, tasted like home.", author: "Priya, India"},
+    {text: "If you’re broke and happy, this is paradise.", author: "Emma, Canada"},
+    {text: "Bathrooms cleaner than my own flat. No complaints.", author: "Mateo, Argentina"},
+    {text: "Central, cheap, chill. I mean… what else do you want?", author: "Zofia, Poland"},
+    {text: "Every corridor conversation turned into a city guide. Guests = best tour guides.", author: "Ahmed, Egypt"},
+    {text: "Beds solid, WiFi fast, host cool. Stop scrolling, just book.", author: "Luca, Italy"},
+    {text: "Rowdy Place has that ‘real life’ vibe. Felt like living, not just traveling.", author: "Sarah, Australia"},
+    {text: "Came for a cheap bed. Left with a hangover, three new tattoos, and a questionable life story.", author: "Jack, UK"},
+    {text: "Shower pressure strong enough to erase my sins. 10/10 would repent again.", author: "Mila, Serbia"},
+    {text: "Kitchen smells like garlic and freedom. Backpacker gourmet.", author: "Chen, Taiwan"},
+    {text: "Beds so comfy I almost missed my bus. Twice. Sorry, Skopje.", author: "Pablo, Chile"},
+    {text: "This ain’t a hostel, it’s therapy disguised as cheap accommodation.", author: "Zoe, France"},
+    {text: "Felt like a commune where everyone pretends to cook pasta but just drinks beer.", author: "Layla, Morocco"},
+    {text: "Cheap, central, and slightly chaotic — exactly how I like my life.", author: "Oskar, Norway"},
+    {text: "Shared kitchen = United Nations of noodles.", author: "Arjun, India"},
+    {text: "Don’t expect luxury. Expect stories. The kind you’ll tell ten years later.", author: "Katya, Ukraine"},
+    {text: "Rowdy Place felt like staying at a friend’s big apartment — clean beds, shared kitchens, and good vibes without the fake hotel energy.", author: "Anja, Slovenia"},
+    {text: "The room had plenty of space and natural light, bathroom inside, and it was easy to walk everywhere from here. Ideal for budget travelers.", author: "Markus, Germany"},
+    {text: "It’s not a hotel, more like a relaxed guest house where you share a room with other travelers. I loved the chill atmosphere.", author: "Elif, Turkey"},
+    {text: "For 10 euros a bed, it’s unbeatable. Clean sheets, private bathroom in the room, and a short walk to the city center.", author: "David, UK"},
+    {text: "I stayed three nights and it felt easygoing and safe. More like a shared home than a business.", author: "Valeria, Italy"},
+    {text: "The kitchens were handy to cook something simple, and the rooms had good airflow and light. Everything straightforward and comfortable.", author: "Jin, South Korea"},
+    {text: "If you want a casual place to sleep and meet a few travelers without paying hotel prices, Rowdy Place is spot on.", author: "Peter, Hungary"},
+    {text: "I liked that every room had its own bathroom — makes sharing much easier. Location couldn’t be better, everything in walking distance.", author: "Sofia, Portugal"},
+    {text: "It’s exactly what it says: beds for travelers at a fair price, nothing fake or overcomplicated. Just right.", author: "Lucas, Brazil"},
+    {text: "Quiet at night, friendly people, and the owner is helpful with tips around the city. Felt more personal than any hotel.", author: "Maria, Greece"}
+];
+function setupDynamicTestimonials() {
+    const section = document.getElementById('testimonial-section');
+    let expanded = false;
+    function renderTestimonials() {
+        section.innerHTML = "";
+        const toShow = expanded ? allReviews.length : 6;
+        for (let i = 0; i < toShow; i++) {
+            const review = allReviews[i];
+            section.innerHTML += `<p class='italic mb-2'>"${review.text}"</p><p class='text-sm text-gray-600'>— ${review.author}</p><hr class='my-3'>`;
+        }
+        section.innerHTML += `<button id='toggle-reviews' class='btn-accent py-2 px-4 rounded-lg font-semibold mt-2'>${expanded ? 'View Less' : 'View More'}</button>`;
+        document.getElementById('toggle-reviews').onclick = function() {
+            expanded = !expanded;
+            renderTestimonials();
+        };
+    }
+    renderTestimonials();
 }
-function selectRoom(roomType) {
-    selectedRoom = roomType;
-}
-function renderCalendar(month, year) {
-    const calendarEl = document.getElementById('calendar');
-    const firstDay = new Date(year, month, 1);
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const startingDay = firstDay.getDay();
-    const today = new Date();
-    const isCurrentMonth = month === today.getMonth() && year === today.getFullYear();
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    let calendarHTML = `
-        <div class="flex justify-between items-center mb-4">
-            <button onclick="gotoPrevMonth()" class="p-2 rounded-full hover:bg-gray-100">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                </svg>
-            </button>
-            <h3 class="text-lg font-bold">${monthNames[month]} ${year}</h3>
-            <button onclick="gotoNextMonth()" class="p-2 rounded-full hover:bg-gray-100">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-            </button>
-        </div>
-        <div class="grid grid-cols-7 gap-1 mb-2">
-            <div class="text-center text-sm font-medium">Sun</div>
-            <div class="text-center text-sm font-medium">Mon</div>
-            <div class="text-center text-sm font-medium">Tue</div>
-            <div class="text-center text-sm font-medium">Wed</div>
-            <div class="text-center text-sm font-medium">Thu</div>
-            <div class="text-center text-sm font-medium">Fri</div>
-            <div class="text-center text-sm font-medium">Sat</div>
-        </div>
-        <div class="grid grid-cols-7 gap-1">
-    `;
-    for (let i = 0; i < startingDay; i++) {
-        calendarHTML += `<div class="h-10"></div>`;
-    }
-    for (let day = 1; day <= daysInMonth; day++) {
-        const date = new Date(year, month, day);
-        const isToday = isCurrentMonth && day === today.getDate();
-        const isPast = date < today && !isToday;
-        const isSelected = selectedDate && selectedDate.getDate() === day && selectedDate.getMonth() === month && selectedDate.getFullYear() === year;
-        let dayClass = "calendar-day h-10 flex items-center justify-center rounded-full cursor-pointer";
-        if (isSelected) dayClass += " selected";
-        if (isToday) dayClass += " today";
-        if (isPast) dayClass += " disabled";
-        calendarHTML += `
-            <div onclick="${isPast ? '' : `selectDay(${day})`}" class="${dayClass}">
-                ${day}
-            </div>
-        `;
-    }
-    calendarHTML += `</div>`;
-    calendarEl.innerHTML = calendarHTML;
-}
-function gotoPrevMonth() {
-    currentMonth--;
-    if (currentMonth < 0) {
-        currentMonth = 11;
-        currentYear--;
-    }
-    renderCalendar(currentMonth, currentYear);
 }
 function gotoNextMonth() {
     currentMonth++;

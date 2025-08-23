@@ -88,22 +88,14 @@
                 </div>
                 <!-- Quick Gallery -->
                 <h3 class="text-xl font-bold mb-4">Backpacker vibe</h3>
-                <div class="grid grid-cols-2 gap-3 mb-8">
-                    <div class="card aspect-square bg-gray-100 rounded-xl overflow-hidden">
-                        <div class="w-full h-full bg-gradient-to-br from-primary/10 to-accent/10"></div>
-                    </div>
-                    <div class="card aspect-square bg-gray-100 rounded-xl overflow-hidden">
-                        <div class="w-full h-full bg-gradient-to-br from-accent/10 to-primary/10"></div>
-                    </div>
-                    <div class="card aspect-square bg-gray-100 rounded-xl overflow-hidden">
-                        <div class="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20"></div>
-                    </div>
-                    <div class="card aspect-square bg-gray-100 rounded-xl overflow-hidden">
-                        <div class="w-full h-full bg-gradient-to-br from-accent/20 to-primary/20"></div>
-                    </div>
+                <div id="dynamic-gallery" class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+                    <div class="gallery-panel card aspect-square bg-gray-100 rounded-xl overflow-hidden flex flex-wrap"></div>
+                    <div class="gallery-panel card aspect-square bg-gray-100 rounded-xl overflow-hidden flex flex-wrap"></div>
+                    <div class="gallery-panel card aspect-square bg-gray-100 rounded-xl overflow-hidden flex flex-wrap"></div>
+                    <div class="gallery-panel card aspect-square bg-gray-100 rounded-xl overflow-hidden flex flex-wrap"></div>
                 </div>
                 <!-- Testimonial -->
-                <div class="card p-6">
+                <div class="card p-6" id="testimonial-section">
                     <p class="italic mb-2">"Great location, clean rooms, and friendly environment. Perfect for backpackers!"</p>
                     <p class="text-sm text-gray-600">- Marco, Italy</p>
                     <hr class="my-3">
