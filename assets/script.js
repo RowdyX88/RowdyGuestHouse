@@ -130,6 +130,41 @@ function renderMinimalistCalendar() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Prepend room and date info to message textarea, non-removable
+    const messageBox = document.getElementById('message');
+    function prependRoomDateToMessage() {
+        let roomText = window.selectedRoom ? `Room: ${window.selectedRoom}` : '';
+        let dateText = '';
+        if (calendarSelectedStart && calendarSelectedEnd) {
+            dateText = `Dates: ${calendarSelectedStart.getDate()}/${calendarSelectedStart.getMonth()+1}/${calendarSelectedStart.getFullYear()} - ${calendarSelectedEnd.getDate()}/${calendarSelectedEnd.getMonth()+1}/${calendarSelectedEnd.getFullYear()}`;
+        } else if (calendarSelectedStart) {
+            dateText = `Date: ${calendarSelectedStart.getDate()}/${calendarSelectedStart.getMonth()+1}/${calendarSelectedStart.getFullYear()}`;
+        }
+        let info = '';
+        if (roomText) info += `**${roomText}**\n`;
+        if (dateText) info += `**${dateText}**\n`;
+        // Remove any previous room/date info at the top (multiple times)
+            if (messageBox) {
+                // Remove any previous bolded Room/Date info at the top (handles multiple, handles both Room and Dates)
+                let userText = messageBox.value.replace(/^(\*\*Room:.*\*\*\n)?(\*\*Date[s]?:.*\*\*\n)?/m, '');
+                messageBox.value = info + userText.trimStart();
+            }
+    }
+    // Update on room/date selection
+    window.prependRoomDateToMessage = prependRoomDateToMessage;
+    // Hook into room/date selection
+    const origSelectRoom = window.selectRoom;
+    window.selectRoom = function(roomName) {
+        origSelectRoom(roomName);
+        prependRoomDateToMessage();
+    };
+    messageBox && messageBox.addEventListener('focus', prependRoomDateToMessage);
+    // Calendar selection
+    const origUpdateBookingChips = window.updateBookingChips || updateBookingChips;
+    window.updateBookingChips = function() {
+        origUpdateBookingChips();
+        prependRoomDateToMessage();
+    };
     renderMinimalistCalendar();
     updateBookingChips();
 });
@@ -308,13 +343,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateHiddenFields() {
         const roomField = document.getElementById('hidden-room');
         const datesField = document.getElementById('hidden-dates');
-        roomField.value = window.selectedRoom ? window.selectedRoom : '';
+        roomField.value = window.selectedRoom ? window.selectedRoom : 'Not selected';
         if (calendarSelectedStart && calendarSelectedEnd) {
             datesField.value = `${calendarSelectedStart.getDate()}/${calendarSelectedStart.getMonth()+1}/${calendarSelectedStart.getFullYear()} - ${calendarSelectedEnd.getDate()}/${calendarSelectedEnd.getMonth()+1}/${calendarSelectedEnd.getFullYear()}`;
         } else if (calendarSelectedStart) {
             datesField.value = `${calendarSelectedStart.getDate()}/${calendarSelectedStart.getMonth()+1}/${calendarSelectedStart.getFullYear()}`;
         } else {
-            datesField.value = '';
+            datesField.value = 'Not selected';
         }
     }
     // Remove MutationObserver to prevent recursion
