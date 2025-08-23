@@ -227,7 +227,6 @@ const allReviews = [
     { text: "Felt like staying with a friend. Super chill and central.", author: "Ana, Spain" },
     { text: "Loved the kitchen setup and the privacy of the rooms.", author: "Tom, UK" },
     { text: "Perfect for solo travelers who want something simple and real.", author: "Elif, Turkey" },
-    { text: "Ten euros and I got more comfort than in a 50€ hotel. Madness.", author: "Jonas, Germany" },
     { text: "Host is like that cool cousin you crash with. No stress, just good vibes.", author: "Sofia, Portugal" },
     { text: "Stayed three nights, ended up extending to a week. Central, cheap, honest.", author: "Luka, Croatia" },
     { text: "Showers hot, WiFi strong, beds clean. That’s all I need in life.", author: "James, USA" },
