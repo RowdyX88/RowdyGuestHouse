@@ -143,12 +143,12 @@ document.addEventListener('DOMContentLoaded', function() {
         let info = '';
         if (roomText) info += `**${roomText}**\n`;
         if (dateText) info += `**${dateText}**\n`;
-        // Remove any previous room/date info at the top (multiple times)
-            if (messageBox) {
-                // Remove any previous bolded Room/Date info at the top (handles multiple, handles both Room and Dates)
-                let userText = messageBox.value.replace(/^(\*\*Room:.*\*\*\n)?(\*\*Date[s]?:.*\*\*\n)?/m, '');
-                messageBox.value = info + userText.trimStart();
-            }
+        info += 'Extra questions? Write here:';
+        // Remove any previous bolded Room/Date info and extra question prompt at the top
+        if (messageBox) {
+            let userText = messageBox.value.replace(/^(\*\*Room:.*\*\*\n)?(\*\*Date[s]?:.*\*\*\n)?(Extra questions\? Write here:)?/m, '');
+            messageBox.value = info + (userText.trimStart() ? '\n' + userText.trimStart() : '');
+        }
     }
     // Update on room/date selection
     window.prependRoomDateToMessage = prependRoomDateToMessage;
