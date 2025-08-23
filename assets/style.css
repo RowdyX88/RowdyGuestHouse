@@ -1,3 +1,8 @@
+/* Smaller calendar for Rooms section */
+.calendar-rooms {
+    max-width: 340px;
+    margin: 0 auto;
+}
 .map-iframe {
     width: 100%;
     height: 300px;
@@ -116,27 +121,46 @@ h1, h2, h3 {
 .calendar-day.selected {
     background-color: var(--primary);
     color: white;
-.gallery-panel {
-    min-width: 150px;
-    min-height: 150px;
-    width: 100%;
-    height: 100%;
+}
+/* Filmstrip gallery styles */
+#dynamic-gallery {
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0 auto 2rem auto;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    height: 220px;
+}
+.filmstrip-track {
     display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    justify-content: stretch;
-    background: #eee;
+    animation: filmstrip-scroll 20s linear infinite;
+}
+.gallery-image {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    margin: 0 2px;
+    border-radius: 16px;
+    display: block;
+    border: 8px solid var(--primary);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18), 0 0 0 4px var(--accent) inset;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
 }
 
-.gallery-panel img {
-    width: 48%;
-    height: 48%;
-    object-fit: cover;
-    background: #ccc;
-    border-radius: 8px;
-    margin: 1%;
-    border: 2px solid #f00;
+.frame-primary {
+    border-color: var(--primary) !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18), 0 0 0 4px var(--primary) inset !important;
+    background: linear-gradient(135deg, #fff 0%, var(--primary) 100%) !important;
 }
+.frame-accent {
+    border-color: var(--accent) !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18), 0 0 0 4px var(--accent) inset !important;
+    background: linear-gradient(135deg, #fff 0%, var(--accent) 100%) !important;
+}
+@keyframes filmstrip-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 .calendar-day.disabled {
     color: #ccc;
