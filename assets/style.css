@@ -1,3 +1,9 @@
+/* Smaller dorm panels for booking page */
+#book .card {
+    padding: 0.15rem 0.1rem;
+    font-size: 0.7rem;
+    border-radius: 4px;
+}
 /* Smaller calendar for Rooms section */
 .calendar-rooms {
     max-width: 340px;
